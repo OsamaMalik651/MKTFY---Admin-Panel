@@ -15,8 +15,8 @@ import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "assets/img/sidebar-2.jpg";
-import logo from "assets/img/reactlogo.png";
+import bgImage from "assets/img/sidebar-background.jpg";
+import logo from "assets/img/mktfy_logo.svg";
 
 let ps;
 
@@ -55,13 +55,6 @@ export default function Admin({ ...rest }) {
   };
   const handleColorClick = (color) => {
     setColor(color);
-  };
-  const handleFixedClick = () => {
-    if (fixedClasses === "dropdown") {
-      setFixedClasses("dropdown show");
-    } else {
-      setFixedClasses("dropdown");
-    }
   };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -105,11 +98,11 @@ export default function Admin({ ...rest }) {
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
-        <Navbar
+        {/* <Navbar
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
-        />
+        /> */}
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>
@@ -118,15 +111,6 @@ export default function Admin({ ...rest }) {
         ) : (
           <div className={classes.map}>{switchRoutes}</div>
         )}
-        {getRoute() ? <Footer /> : null}
-        <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        />
       </div>
     </div>
   );
