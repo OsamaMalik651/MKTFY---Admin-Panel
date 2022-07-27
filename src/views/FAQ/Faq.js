@@ -11,6 +11,8 @@ import { ReactComponent as RighArrow } from "assets/img/right-arrow.svg";
 import { ReactComponent as LeftArrow } from "assets/img/icon_left_arrowhead.svg"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import Modal from 'components/Modal.js/Modal';
+import FaqEdit from 'components/Faq/FaqEdit';
 
 const useStyles = makeStyles(styles);
 const Faq = () => {
@@ -90,6 +92,10 @@ const Faq = () => {
                         </CardBody>
                     </Card>
                 </GridContainer>
+            }
+            {showModal && <Modal>
+                <FaqEdit close={setShowModal} faq={selectedFaq} />
+            </Modal>
             }
         </div >
     )
