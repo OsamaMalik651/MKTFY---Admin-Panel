@@ -1,3 +1,4 @@
+import { primaryColor } from "assets/jss/material-dashboard-react"
 import { grayColor } from "assets/jss/material-dashboard-react"
 import { whiteColor, blackColor, hexToRgb } from "assets/jss/material-dashboard-react"
 
@@ -90,9 +91,13 @@ const faqEditStyle = {
         border: `1px solid ${grayColor[4]}`,
         borderRadius: "4px",
         color: blackColor,
-
-
-
+        "&:focus": {
+            borderColor: primaryColor[1],
+        }
+    },
+    Button: {
+        alignSelf: "center",
+        marginTop: "4.625rem"
     }
 }
 

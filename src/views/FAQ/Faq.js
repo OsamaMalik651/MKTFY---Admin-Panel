@@ -13,6 +13,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Modal from 'components/Modal.js/Modal';
 import FaqEdit from 'components/Faq/FaqEdit';
+import RoundedButton from 'components/RoundedButton/RoundedButton';
 
 const useStyles = makeStyles(styles);
 const Faq = () => {
@@ -32,7 +33,14 @@ const Faq = () => {
     const getFaq = (id) => {
         return FAQS.find((element, index) => index === parseInt(id))
     }
-
+    //Modify this function when integrating with backend to create new FAQ
+    const createNewFaq = (faqObject) => {
+        console.log(faqObject)
+    }
+    //Modify this function when integrating with backend to edit a FAQ
+    const updateFaq = (faqObject) => {
+        console.log(faqObject)
+    }
     React.useEffect(() => {
         if (query.get("id") === null) {
             setShowList(true)
@@ -51,14 +59,14 @@ const Faq = () => {
                         <CardHeader color="primary" className={classes.faqHeader}>
 
                             <h1 className={classes.faqCardHeading}>Frequently Asked Questions</h1>
-                            <Button>Add</Button>
+                            <RoundedButton size="sm" color="secondary" onClick={() => { setShowModal(true) }}>Add</RoundedButton>
                         </CardHeader>
                         <CardBody className={classes.faqCardBody}>
                             {FAQS.map((faq, index) => {
                                 return (
                                     <div
                                         className={classes.faqCardQuestions}
-                                        key={index}
+                                        key={faq.id}
                                     >
                                         <Link className={classes.faqCardQuestion} to={`/admin/faq?id=${index}`}
                                         >
@@ -77,24 +85,25 @@ const Faq = () => {
                         <CardHeader color="primary" className={classes.faqHeader}>
                             <LeftArrow onClick={() => history.goBack()} style={{ cursor: 'pointer' }} />
                             <h1 className={classes.faqCardHeading}>{selectedFaq.question}</h1>
-                            <Button onClick={() => { setShowModal(true) }}>Edit</Button>
+                            <RoundedButton onClick={() => { setShowModal(true) }} color="secondary" size="sm">Edit</RoundedButton>
                         </CardHeader>
                         <CardBody className={classes.faqCardBody}>
                             <div className={classes.faqAnswers}>
-                                {selectedFaq.answer.map((sentence, index) => {
+                                {selectedFaq.answer.split(".").map((sentence, index) => {
                                     return (
-
                                         <p key={index} className={classes.faqAnswer}>{sentence}</p>
-
                                     );
                                 })}
                             </div>
+
                         </CardBody>
                     </Card>
                 </GridContainer>
             }
             {showModal && <Modal>
-                <FaqEdit close={setShowModal} faq={selectedFaq} />
+                {!showList ?
+                    <FaqEdit close={setShowModal} faq={selectedFaq} edit onSave={(faqObject) => updateFaq(faqObject)} /> :
+                    <FaqEdit close={setShowModal} onSave={(faqObject) => createNewFaq(faqObject)} />}
             </Modal>
             }
         </div >

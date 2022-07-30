@@ -58,7 +58,10 @@ const faqStyle = {
     },
     faqCardQuestion: {
         color: "#434344",
-        fontSize: "21px"
+        fontSize: "21px",
+        width: "inherit",
+        display: "flex",
+        justifyContent: "space-between",
     },
     faqAnswers: {
         marginTop: "2.75rem",
@@ -71,8 +74,6 @@ const faqStyle = {
         margin: 0,
         fontSize: "21px",
     },
-
-
 }
 
 export default faqStyle
