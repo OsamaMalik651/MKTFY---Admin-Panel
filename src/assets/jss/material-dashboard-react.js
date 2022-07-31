@@ -70,15 +70,14 @@ const defaultFont = {
   lineHeight: "1.5em",
 };
 
-const primaryColor = ["#8840D9", "#6E20BE", "#560F9F", "#9349DE", "#631BAF", "#7217B3", "#6318AF", "#9349DE9A"];
-const warningColor = ["#FFBA00", "#ffba00"];
+const primaryColor = ["#8840D9", "#6E20BE", "#560F9F", "#9349DE33", "#631BAF", "#7217B3", "#6318AF", "#9349DE9A", "#9349DE"];
+const warningColor = ["#FFBA00", "#ffba00", "#ffba0062"];
 const dangerColor = ["#FF2128", "#FF2C2C", "#FF2727", "#AD2424"];
 const successColor = ["#6CC04B"];
 const infoColor = ["#00acc1", "#26c6da", "#00acc1", "#00d3ee"];
 const roseColor = ["#e91e63", "#ec407a", "#d81b60", "#eb3573"];
 const grayColor = [
-  "#4D4D4D", "#707070", "#575757", "#00000024", "#E2E2E2", "#00000029", "#4D4D4D60", "#F0F2F8", "#888889", "#0000007E", "#7070704D", "#2A2E43"
-
+  "#4D4D4D", "#707070", "#575757", "#00000024", "#E2E2E2", "#00000029", "#4D4D4D60", "#F0F2F8", "#888889", "#0000007E", "#7070704D", "#2A2E43", "#f4f4f5", "#f4f4fs"
 ];
 const blackColor = "#000";
 const whiteColor = "#FFF";

@@ -17,7 +17,7 @@ const roundedbuttonStyle = {
         minWidth: "auto",
         width: "21.563rem",
         height: "4rem",
-        backgroundColor: grayColor[1],
+        backgroundColor: "grayColor[1]",
         color: whiteColor,
         boxShadow:
             "0 2px 2px 0 rgba(" +
@@ -51,6 +51,7 @@ const roundedbuttonStyle = {
     },
     primary: {
         backgroundColor: primaryColor[6],
+        border: `1px solid ${primaryColor[6]}`,
         "&:hover": {
             backgroundColor: primaryColor[6],
         },
@@ -60,6 +61,14 @@ const roundedbuttonStyle = {
     },
     secondary: {
         backgroundColor: warningColor[1],
+        boxShadow:
+            "0 2px 2px 0 rgba(" +
+            hexToRgb(infoColor[0]) +
+            ", 0.14), 0 3px 1px -2px rgba(" +
+            hexToRgb(infoColor[0]) +
+            ", 0.2), 0 1px 5px 0 rgba(" +
+            hexToRgb(infoColor[0]) +
+            ", 0.12)",
         "&:hover,&:focus": {
             backgroundColor: warningColor[1],
         },
@@ -72,6 +81,15 @@ const roundedbuttonStyle = {
     },
     danger: {
         backgroundColor: dangerColor[0],
+
+        boxShadow:
+            "0 2px 2px 0 rgba(" +
+            hexToRgb(dangerColor[0]) +
+            ", 0.14), 0 3px 1px -2px rgba(" +
+            hexToRgb(dangerColor[0]) +
+            ", 0.2), 0 1px 5px 0 rgba(" +
+            hexToRgb(dangerColor[0]) +
+            ", 0.12)",
         "&:hover,&:focus": {
             backgroundColor: dangerColor[0],
             boxShadow:
@@ -108,10 +126,10 @@ const roundedbuttonStyle = {
     cancel: {
         backgroundColor: grayColor[4],
         color: grayColor[8],
+        border: `1px solid ${grayColor[8]}`,
         "&:hover,&:focus": {
             backgroundColor: grayColor[4],
             color: grayColor[8],
-
         },
     },
     outline: {

@@ -16,6 +16,7 @@ export default function RoundedButton(props) {
         color,
         children,
         disabled,
+        outline,
         size,
         className,
         muiClasses,
@@ -27,6 +28,7 @@ export default function RoundedButton(props) {
         [classes[color]]: color,
         [classes[size]]: size,
         [classes.disabled]: disabled,
+        [classes.outline]: outline,
         [className]: className,
     });
     return (
@@ -41,9 +43,11 @@ RoundedButton.propTypes = {
         "secondary",
         "cancel",
         "gray",
+        "dangerOutline",
         "danger",
     ]),
     size: PropTypes.oneOf(["sm", "lg"]),
+    outline: PropTypes.bool,
     disabled: PropTypes.bool,
     className: PropTypes.string,
     // use this to pass the classes props from Material-UI
