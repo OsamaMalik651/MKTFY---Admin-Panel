@@ -9,6 +9,7 @@ const appStyle = (theme) => ({
     position: "relative",
     top: "0",
     height: "100vh",
+    padding: "0rem 6rem 0rem 2rem",
   },
   mainPanel: {
     [theme.breakpoints.up("md")]: {
@@ -25,9 +26,11 @@ const appStyle = (theme) => ({
   content: {
     marginTop: "70px",
     padding: "30px 15px",
-    minHeight: "calc(100vh - 123px)",
+    maxHeight: "fit-content",
   },
-  container,
+  container: {
+    maxHeight: "fit-content",
+  },
   map: {
     marginTop: "70px",
   },
