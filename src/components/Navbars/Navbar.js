@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
-import Menu from "@material-ui/icons/Menu";
-// core components
-import AdminNavbarLinks from "./AdminNavbarLinks.js";
-import RTLNavbarLinks from "./RTLNavbarLinks.js";
-import Button from "components/CustomButtons/Button.js";
 
+// core components
+
+import { ReactComponent as DropDownArrow } from "assets/img/chevron-down.svg"
+import { ReactComponent as SearchIcon } from "assets/img/search-icon.svg"
 //hooks
 import { useRouteName } from "hooks";
 
@@ -22,6 +19,7 @@ import styles from "assets/jss/material-dashboard-react/components/headerStyle.j
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  const [showDropDown, setShowDropDown] = useState(false)
   const classes = useStyles();
   const routeName = useRouteName();
   const { color } = props;
@@ -31,24 +29,33 @@ export default function Header(props) {
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>
+        <div>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
+          <p className={classes.title}>
             {routeName}
-          </Button>
+          </p>
         </div>
-        <Hidden smDown implementation="css">
-          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
-        </Hidden>
-        <Hidden mdUp implementation="css">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
-          >
-            <Menu />
-          </IconButton>
-        </Hidden>
+        {routeName !== "Dashboard" &&
+          <div className={classes.searchBar}>
+            <input placeholder="Search" />
+            <SearchIcon />
+          </div>
+        }
+        <div className={classes.adminButton}>
+          <p>
+            <span>MKTFY</span> ADMIN
+          </p>
+          <DropDownArrow onClick={() => { setShowDropDown(!showDropDown) }} />
+        </div>
+        {showDropDown && <div className={classes.adminOptions}>
+          <h3>
+            MKTFY ADMIN
+          </h3>
+          <p>Edit Profile</p>
+          <div className={classes.adminLogout}>
+            <p>Logout</p>
+          </div>
+        </div>}
       </Toolbar>
     </AppBar>
   );
