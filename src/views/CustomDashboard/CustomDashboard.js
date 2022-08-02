@@ -10,6 +10,7 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import GridItem from "components/Grid/GridItem";
 import CardBody from "components/Card/CardBody";
 import { grayColor } from "assets/jss/material-dashboard-react";
+import StatsCard from "components/StatsCard/StatsCard";
 
 const useStyles = makeStyles(styles);
 const CustomDashboard = () => {
@@ -100,6 +101,9 @@ const CustomDashboard = () => {
                         <p>Calculated over the last year</p>
                     </CardFooter>
                 </Card>
+            </GridItem>
+            <GridItem>
+                <StatsCard />
             </GridItem>
         </GridContainer>
     </div >;

@@ -41,10 +41,7 @@ const dashboardStyle = {
     height: "16.25rem",
     display: "flex",
     flexDirection: "column",
-    fontFamily: "open sans",
-    "& > $infoCardFooter": {
-      padding: 0
-    }
+    fontFamily: "open sans"
 
   },
   infoCardHeader1: {
@@ -59,17 +56,13 @@ const dashboardStyle = {
       fontSize: "1.313rem",
       color: grayColor[14],
     },
-    "& *": {
-      padding: 0
-    }
   },
   infoCardFooter: {
     display: "flex",
     justifyContent: "flex-end",
     color: grayColor[14],
     fontSize: "1rem",
-    fontFamily: "open sans",
-
+    fontFamily: "open sans"
 
   },
   cardCategory: {

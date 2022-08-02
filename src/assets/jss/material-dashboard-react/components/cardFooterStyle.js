@@ -11,6 +11,7 @@ const cardFooterStyle = {
     display: "flex",
     backgroundColor: "transparent",
     border: "0",
+    height: "1.5rem",
   },
   cardFooterProfile: {
     marginTop: "-15px",
