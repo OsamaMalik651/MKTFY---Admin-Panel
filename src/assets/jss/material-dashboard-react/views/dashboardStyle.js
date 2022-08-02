@@ -1,3 +1,4 @@
+import { card } from "assets/jss/material-dashboard-react";
 import {
   successColor,
   whiteColor,
@@ -34,13 +35,44 @@ const dashboardStyle = {
       marginLeft: "3px",
     },
   },
+  infoCard: {
+    ...card,
+    maxWidth: "16.25rem",
+    height: "16.25rem",
+    display: "flex",
+    flexDirection: "column",
+    fontFamily: "open sans"
+
+  },
+  infoCardHeader1: {
+    backgroundColor: "blue"
+  },
+  infoCardBody: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    "& p": {
+      fontSize: "1.313rem",
+      color: grayColor[14],
+    },
+  },
+  infoCardFooter: {
+    display: "flex",
+    justifyContent: "flex-end",
+    color: grayColor[14],
+    fontSize: "1rem",
+    fontFamily: "open sans"
+
+  },
   cardCategory: {
-    color: grayColor[0],
-    margin: "0",
-    fontSize: "14px",
+    color: grayColor[14],
+    fontSize: "24px",
+    fontWeight: "300",
     marginTop: "0",
-    paddingTop: "10px",
-    marginBottom: "0",
+    paddingTop: "13px",
+    width: "100%",
+    height: "33px",
   },
   cardCategoryWhite: {
     color: "rgba(" + hexToRgb(whiteColor) + ",.62)",
@@ -53,7 +85,8 @@ const dashboardStyle = {
     color: grayColor[2],
     marginTop: "0px",
     minHeight: "auto",
-    fontWeight: "300",
+    fontWeight: "bold",
+    fontSize: "45px",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: "3px",
     textDecoration: "none",
@@ -62,6 +95,16 @@ const dashboardStyle = {
       fontWeight: "400",
       lineHeight: "1",
     },
+  },
+  cardText: {
+    color: grayColor[2],
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "bold",
+    fontSize: "21px",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    marginBottom: "3px",
+    textDecoration: "none",
   },
   cardTitleWhite: {
     color: whiteColor,

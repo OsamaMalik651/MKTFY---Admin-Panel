@@ -46,7 +46,7 @@ RoundedButton.propTypes = {
         "dangerOutline",
         "danger",
     ]),
-    size: PropTypes.oneOf(["sm", "lg"]),
+    size: PropTypes.oneOf(["sm", "md", "lg"]),
     outline: PropTypes.bool,
     disabled: PropTypes.bool,
     className: PropTypes.string,

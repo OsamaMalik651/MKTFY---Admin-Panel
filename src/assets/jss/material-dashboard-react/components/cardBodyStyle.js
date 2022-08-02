@@ -4,6 +4,9 @@ const cardBodyStyle = {
     flex: "1 1 auto",
     WebkitBoxFlex: "1",
     position: "relative",
+    "& *": {
+      margin: 0,
+    }
   },
   cardBodyPlain: {
     paddingLeft: "5px",
