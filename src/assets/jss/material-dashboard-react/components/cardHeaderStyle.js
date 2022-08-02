@@ -10,13 +10,15 @@ import {
 
 const cardHeaderStyle = {
   cardHeader: {
+    boxSizing: "border-box",
     padding: "0.75rem 1.25rem",
     marginBottom: "0",
     borderBottom: "none",
     background: "transparent",
-    zIndex: "3 !important",
+    zIndex: "1 !important",
     "&$cardHeaderPlain,&$cardHeaderIcon,&$cardHeaderStats,&$warningCardHeader,&$successCardHeader,&$dangerCardHeader,&$infoCardHeader,&$primaryCardHeader,&$roseCardHeader": {
-      margin: "0 15px",
+      margin: "0 10px",
+      marginLeft: "15px",
       padding: "0",
       position: "relative",
       color: whiteColor,
@@ -26,8 +28,8 @@ const cardHeaderStyle = {
     },
     "&$warningCardHeader,&$successCardHeader,&$dangerCardHeader,&$infoCardHeader,&$primaryCardHeader,&$roseCardHeader": {
       "&:not($cardHeaderIcon)": {
-        borderRadius: "3px",
-        marginTop: "-20px",
+        borderRadius: "10px",
+        marginTop: "-60px",
         padding: "15px",
       },
     },
@@ -38,6 +40,7 @@ const cardHeaderStyle = {
       width: "36px",
       height: "36px",
       margin: "10px 10px 4px",
+
     },
     "&$cardHeaderStats i,&$cardHeaderStats .material-icons": {
       fontSize: "36px",

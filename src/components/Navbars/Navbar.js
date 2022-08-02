@@ -5,27 +5,38 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
-
+import Menu from "@material-ui/icons/Menu";
 // core components
-
+import AdminNavbarLinks from "./AdminNavbarLinks.js";
+import RTLNavbarLinks from "./RTLNavbarLinks.js";
+import Button from "components/CustomButtons/Button.js";
 import { ReactComponent as DropDownArrow } from "assets/img/chevron-down.svg"
 import { ReactComponent as SearchIcon } from "assets/img/search-icon.svg"
 //hooks
 import { useRouteName } from "hooks";
 
 import styles from "assets/jss/material-dashboard-react/components/headerStyle.js";
+import Modal from "components/Modal.js/Modal.js";
+import ProfileEdit from "components/Profile/ProfileEdit.js";
+import Logout from "components/Profile/Logout.js";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
-  const [showDropDown, setShowDropDown] = useState(false)
   const classes = useStyles();
   const routeName = useRouteName();
   const { color } = props;
   const appBarClasses = classNames({
     [" " + classes[color]]: color,
   });
+
+  const [showDropDown, setShowDropDown] = useState(false)
+  const [showProfileEditModal, setShowProfileEditModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
@@ -51,12 +62,18 @@ export default function Header(props) {
           <h3>
             MKTFY ADMIN
           </h3>
-          <p>Edit Profile</p>
+          <p onClick={() => { setShowProfileEditModal(true); setShowDropDown(false) }}>Edit Profile</p>
           <div className={classes.adminLogout}>
-            <p>Logout</p>
+            <p onClick={() => { setShowLogoutModal(true); setShowDropDown(false) }}>Logout</p>
           </div>
         </div>}
       </Toolbar>
+      {showProfileEditModal && <Modal>
+        <ProfileEdit close={() => { setShowProfileEditModal(false) }} />
+      </Modal>}
+      {showLogoutModal && <Modal>
+        <Logout close={() => { setShowLogoutModal(false) }} />
+      </Modal>}
     </AppBar>
   );
 }

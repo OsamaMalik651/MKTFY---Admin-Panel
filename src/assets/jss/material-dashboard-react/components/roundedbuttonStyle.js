@@ -147,6 +147,15 @@ const roundedbuttonStyle = {
         lineHeight: "1.5",
         borderRadius: "2.313rem",
     },
+    md: {
+        width: "29.5rem",
+        height: "4rem",
+        padding: "1rem 3.125rem",
+        fontSize: "1.25rem",
+        fontWeight: "500",
+        lineHeight: "1.5",
+        borderRadius: "2.313rem",
+    },
     lg: {
         width: "36rem",
         height: "4rem",
