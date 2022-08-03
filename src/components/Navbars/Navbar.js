@@ -23,9 +23,11 @@ import Modal from "components/Modal.js/Modal.js";
 import ProfileEdit from "components/Profile/ProfileEdit.js";
 import Logout from "components/Profile/Logout.js";
 
+
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+
   const classes = useStyles();
   const routeName = useRouteName();
   const { color } = props;
