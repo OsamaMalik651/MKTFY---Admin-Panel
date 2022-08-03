@@ -8,14 +8,21 @@ import GraphImage from "assets/img/graphImg.svg"
 import CardBody from 'components/Card/CardBody'
 import TrendingUp from '@material-ui/icons/TrendingUp'
 import { successColor } from 'assets/jss/material-dashboard-react'
+import ChartistGraph from 'react-chartist'
+import { dailySalesChart } from 'variables/charts'
 
 const useStyles = makeStyles(styles)
 const StatsCard = () => {
     const classes = useStyles()
     return (
-        <Card className={classes.statsCard}>
-            <CardHeader className={classes.statsCardHeader} stats>
-                <img src={GraphImage} alt="" />
+        <Card chart>
+            <CardHeader stats color="primary" className={classes.statsCardHeader}>
+                <ChartistGraph
+                    className="ct-chart"
+                    data={dailySalesChart.data}
+                    type="Line"
+                    options={dailySalesChart.options}
+                    listener={dailySalesChart.animation} />
             </CardHeader>
             <CardBody className={classes.statsCardBody}>
                 <h5>Sales Per day over a month</h5>

@@ -17,13 +17,22 @@ var delays2 = 80,
 
 const dailySalesChart = {
   data: {
-    labels: ["M", "T", "W", "T", "F", "S", "S"],
-    series: [[12, 17, 7, 17, 23, 18, 38]],
+    labels: ["1W", "2W", "3W", "4W"],
+    series: [[12, 20, 7, 30]],
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
-      tension: 0,
+      tension: 2,
     }),
+    axisX: {
+      showGrid: false,
+      showLabel: true
+    },
+    axisY: {
+      showGrid: false,
+      showLabel: false
+    },
+    stretch: true,
     low: 0,
     high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {

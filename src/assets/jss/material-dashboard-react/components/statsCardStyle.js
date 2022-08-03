@@ -13,12 +13,18 @@ export const statsCardStyle = {
         height: "18rem",
         width: "36.813rem",
         postion: "absolute",
-        left: "0.75rem",
+        top: "1.5rem",
+        right: "0.25rem",
         bottom: "2.25rem",
         borderRadius: "0.625rem !important",
+        "& div": {
+            height: "calc(100% - 1rem)",
+            width: "inherit"
+        }
     },
     statsCardBody: {
         // backgroundColor: "blue",
+        marginTop: "2.5rem",
         padding: "0rem 1.815rem",
         "& > h5": {
             fontSize: "1.5rem",
