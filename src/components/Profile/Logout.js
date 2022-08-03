@@ -6,9 +6,13 @@ import React from 'react'
 import styles from "assets/jss/material-dashboard-react/components/profileEditStyle";
 import { makeStyles } from '@material-ui/core'
 import RoundedButton from 'components/RoundedButton/RoundedButton'
+import { AuthContext } from 'context/authContext'
 
+import { useContext } from 'react';
 const useStyles = makeStyles(styles);
 const Logout = ({ close }) => {
+
+    const { authenticated, logout } = useContext(AuthContext);
     const classes = useStyles();
 
     return (
@@ -31,6 +35,7 @@ const Logout = ({ close }) => {
                         <RoundedButton
                             size="sm"
                             color="primary"
+                            onClick={logout}
                         >
                             Logout
                         </RoundedButton>

@@ -24,14 +24,23 @@ import Admin from "layouts/Admin.js";
 import RTL from "layouts/RTL.js";
 
 import "assets/css/material-dashboard-react.css?v=1.10.0";
+import { AuthContextProvider } from "context/authContext";
+import Login from "views/Login/Login";
+import ProtectedRoute from "utils/ProtectedRoute";
+import ForgetPassword from "views/Login/ForgetPassword";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" component={Admin} />
-      <Route path="/rtl" component={RTL} />
-      <Redirect from="/" to="/admin/dashboard" />
-    </Switch>
-  </BrowserRouter>,
+  <AuthContextProvider>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/login" exact component={Login} />
+        <Route path="/login/forgetpassword" component={ForgetPassword} />
+        <ProtectedRoute path="/">
+          <Route path="/admin" component={Admin} />
+          <Redirect from="/" to="/admin/customdashboard" />
+        </ProtectedRoute>
+      </Switch>
+    </BrowserRouter>
+  </AuthContextProvider>,
   document.getElementById("root")
 );
