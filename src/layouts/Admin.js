@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
@@ -20,23 +20,25 @@ import logo from "assets/img/mktfy_logo.svg";
 
 let ps;
 
-const switchRoutes = (
-  <Switch>
+const switchRoutes = (searchTerm) => {
+  return <Switch>
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
           <Route
             path={prop.layout + prop.path}
-            component={prop.component}
+            // component={prop.component}
             key={key}
-          />
+          >
+            <prop.component searchTerm={searchTerm} />
+          </Route>
         );
       }
       return null;
     })}
     <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
-);
+};
 
 const useStyles = makeStyles(styles);
 
@@ -50,6 +52,8 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("blue");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleImageClick = (image) => {
     setImage(image);
   };
@@ -95,18 +99,21 @@ export default function Admin({ ...rest }) {
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
         color={color}
+        onClick={() => setSearchTerm("")}
         {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
+          onChange={setSearchTerm}
+          value={searchTerm}
           {...rest}
         />
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
+            <div className={classes.container}>{switchRoutes(searchTerm)}</div>
           </div>
         ) : (
           <div className={classes.map}>{switchRoutes}</div>

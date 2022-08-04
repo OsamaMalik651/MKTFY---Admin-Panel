@@ -51,6 +51,7 @@ export default function Sidebar(props) {
             className={activePro + classes.item}
             activeClassName="active"
             key={key}
+            onClick={props.onClick}
           >
             <ListItem button className={classes.itemLink + listItemClasses}>
               {typeof prop.icon === "string" ? (

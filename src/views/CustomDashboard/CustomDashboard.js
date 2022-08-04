@@ -11,6 +11,10 @@ import GridItem from "components/Grid/GridItem";
 import CardBody from "components/Card/CardBody";
 import { grayColor } from "assets/jss/material-dashboard-react";
 import StatsCard from "components/StatsCard/StatsCard";
+import { ReactComponent as ListingIcon } from "assets/img/tag.svg";
+import { ReactComponent as UserIcon } from "assets/img/users.svg";
+// import { ReactComponent as DollarIcon } from "assets/img/dollar-icon.svg";
+import { FiDollarSign } from "react-icons/fi";
 
 const useStyles = makeStyles(styles);
 const CustomDashboard = () => {
@@ -33,7 +37,7 @@ const CustomDashboard = () => {
                 <Card className={classes.infoCard}>
                     <CardHeader color="warning" icon stats>
                         <CardIcon color="warning">
-                            <Icon style={{ fontSize: "3rem" }}>content_copy</Icon>
+                            <Icon style={{ fontSize: "3rem" }} component={UserIcon} />
                         </CardIcon>
                         <p className={classes.cardCategory}>Total Users</p>
                     </CardHeader>
@@ -51,7 +55,7 @@ const CustomDashboard = () => {
                 <Card className={classes.infoCard}>
                     <CardHeader color="warning" stats icon>
                         <CardIcon color="warning">
-                            <Icon style={{ fontSize: "3rem" }}>content_copy</Icon>
+                            <Icon style={{ fontSize: "1rem" }} component={ListingIcon} />
                         </CardIcon>
                         <p className={classes.cardCategory}>All Listings</p>
                     </CardHeader>
@@ -69,7 +73,7 @@ const CustomDashboard = () => {
                 <Card className={classes.infoCard}>
                     <CardHeader color="warning" stats icon>
                         <CardIcon color="warning">
-                            <Icon style={{ fontSize: "3rem" }}>content_copy</Icon>
+                            <Icon style={{ fontSize: "3rem", transform: "scaleX(-1)" }}>person_add_outlined_icon</Icon>
                         </CardIcon>
                         <p className={classes.cardCategory}>New Users</p>
                     </CardHeader>
@@ -87,7 +91,7 @@ const CustomDashboard = () => {
                 <Card className={classes.infoCard}>
                     <CardHeader color="warning" stats icon >
                         <CardIcon color="warning">
-                            <Icon style={{ fontSize: "3rem" }}>content_copy</Icon>
+                            <FiDollarSign style={{ width: "46px", height: "auto" }} />
                         </CardIcon>
                         <p className={classes.cardCategory}>Avg Sales</p>
                     </CardHeader>

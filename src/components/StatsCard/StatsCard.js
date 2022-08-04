@@ -29,8 +29,8 @@ const StatsCard = () => {
                 <p>
                     <span><TrendingUp style={{ color: successColor[0] }} /> 68%</span> Increase in this week deals</p>
             </CardBody>
-            {/* <CardFooter stats>
-            </CardFooter> */}
+            <CardFooter stats>
+            </CardFooter>
         </Card>
     )
 }
