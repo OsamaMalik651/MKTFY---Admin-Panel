@@ -16,10 +16,10 @@ import Modal from 'components/Modal.js/Modal'
 import { useEffect } from 'react'
 const useStyles = makeStyles(styles);
 
-const Listings = () => {
+const Listings = ({ searchTerm }) => {
     const classes = useStyles();
     const [activeItems, setActiveItems] = useState(true);
-    const [listings, setListings] = useState([])
+    const [listings, setListings] = useState(dummyListings.cars);
     const [selectedListing, setSelectedListing] = useState({})
     const [approveListing, setApproveListing] = useState(false);
     const [deleteListing, setDeleteListing] = useState(false);
@@ -31,18 +31,40 @@ const Listings = () => {
 
     useEffect(() => {
         if (activeItems) {
-            let listingsToDisplay = dummyListings.cars.filter((listing => listing.pending === false))
-            setListings(listingsToDisplay)
-            setDisableBackwardNav(false);
-            setDisableForwardNav(false)
+            if (searchTerm !== "") {
+                let listingsToDisplay = dummyListings.cars.filter(listing => listing.title.toLowerCase().includes(searchTerm.toLowerCase()) && listing.pending === false)
+                setListings(listingsToDisplay)
+                if (listingsToDisplay.length < 4) {
+                    setDisableBackwardNav(true);
+                    setDisableForwardNav(true)
+                }
+                // setDisableBackwardNav(false);
+                // setDisableForwardNav(false)
+            } else {
+                let listingsToDisplay = dummyListings.cars.filter((listing => listing.pending === false))
+                setListings(listingsToDisplay)
+                setDisableBackwardNav(false);
+                setDisableForwardNav(false)
+            }
         } else {
-            let listingsToDisplay = dummyListings.cars.filter((listing => listing.pending === true))
-            setListings(listingsToDisplay)
-            setDisableBackwardNav(false);
-            setDisableForwardNav(false)
+            if (searchTerm !== "") {
+                let listingsToDisplay = dummyListings.cars.filter(listing => listing.title.toLowerCase().includes(searchTerm.toLowerCase()) && listing.pending === true)
+                setListings(listingsToDisplay);
+                if (listingsToDisplay.length < 4) {
+                    setDisableBackwardNav(true);
+                    setDisableForwardNav(true)
+                }
+                // setDisableBackwardNav(false);
+                // setDisableForwardNav(false)
+            } else {
+                let listingsToDisplay = dummyListings.cars.filter((listing => listing.pending === true))
+                setListings(listingsToDisplay)
+                setDisableBackwardNav(false);
+                setDisableForwardNav(false)
+            }
         }
 
-    }, [activeItems])
+    }, [searchTerm, activeItems])
 
     useEffect(() => {
         if (pageNumber === 0) {

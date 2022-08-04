@@ -16,12 +16,14 @@ import FaqEdit from 'components/Faq/FaqEdit';
 import RoundedButton from 'components/RoundedButton/RoundedButton';
 
 const useStyles = makeStyles(styles);
-const Faq = () => {
+const Faq = ({ searchTerm }) => {
     let history = useHistory();
     const classes = useStyles();
     const [showList, setShowList] = useState(true);
     const [selectedFaq, setSelectedFaq] = useState({ question: "", answer: "" })
+    const [faq, setFaq] = useState(FAQS);
     const [showModal, setShowModal] = useState(false);
+
     const useQuery = () => {
         const { search } = useLocation();
 
@@ -45,12 +47,19 @@ const Faq = () => {
         if (query.get("id") === null) {
             setShowList(true)
         } else {
-
             setSelectedFaq(getFaq(query.get("id")))
             setShowList(false)
         }
 
     }, [query])
+
+    React.useEffect(() => {
+        if (searchTerm !== "") {
+            setFaq(FAQS.filter(faq => faq.question.toLowerCase().includes(searchTerm.toLowerCase())))
+        } else {
+            setFaq(FAQS)
+        }
+    }, [searchTerm])
     return (
         <div>
             {showList ?
@@ -62,7 +71,7 @@ const Faq = () => {
                             <RoundedButton size="sm" color="secondary" onClick={() => { setShowModal(true) }}>Add</RoundedButton>
                         </CardHeader>
                         <CardBody className={classes.faqCardBody}>
-                            {FAQS.map((faq, index) => {
+                            {faq.map((faq, index) => {
                                 return (
                                     <div
                                         className={classes.faqCardQuestions}

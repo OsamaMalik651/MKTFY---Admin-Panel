@@ -50,7 +50,7 @@ export default function Header(props) {
         </div>
         {routeName !== "Dashboard" &&
           <div className={classes.searchBar}>
-            <input placeholder="Search" />
+            <input placeholder="Search" onChange={(e) => props.onChange(e.target.value)} value={props.value} />
             <SearchIcon />
           </div>
         }

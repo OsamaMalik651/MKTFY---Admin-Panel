@@ -84,7 +84,9 @@ const headerStyle = () => ({
     color: grayColor[14],
     "& p": {
       "& span": {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        flexWrap: "wrap",
+
       }
     },
     "& svg": {
