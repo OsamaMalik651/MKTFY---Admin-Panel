@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AuthContext } from 'context/authContext'
-import { Redirect, Route } from 'react-router-dom';
 import { useContext } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import checkAccessToken from './storage-helper';
+
 const ProtectedRoute = ({ children, ...rest }) => {
-    const { authenticated } = useContext(AuthContext);
+    const { authenticated, setAuthenticated } = useContext(AuthContext);
+
+    let accessToken = checkAccessToken();
+
+    React.useEffect(() => {
+        if (accessToken) {
+            setAuthenticated(true);
+        }
+        else {
+            setAuthenticated(false);
+        }
+    }, [accessToken]);
     return (
         <Route {...rest} render={({ location }) => {
             return authenticated === true

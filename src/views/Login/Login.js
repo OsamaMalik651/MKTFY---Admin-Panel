@@ -2,23 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { AuthContext } from 'context/authContext'
 import { useContext } from 'react';
 import RoundedButton from 'components/RoundedButton/RoundedButton';
-import { Redirect, useLocation, useNavigate } from 'react-router-dom';
-import { ReactComponent as DropDownArrow } from "assets/img/dropdownarrow.svg"
-
-import { Button, makeStyles } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
 import styles from "assets/jss/material-dashboard-react/views/loginStyle"
 import logo from "assets/img/logo.svg"
-import closeIcon from "assets/img/icon_close.svg"
 import { Link } from 'react-router-dom';
-import { primaryColor } from 'assets/jss/material-dashboard-react';
-import { check } from 'prettier';
+import Snackbar from 'components/Snackbar/Snackbar';
+
 
 const useStyles = makeStyles(styles)
 
 const Login = () => {
     const classes = useStyles()
-    const { authenticated, login } = useContext(AuthContext);
-    const { state } = useLocation()
+    const { authenticated, login, error, setError, showError, setShowError } = useContext(AuthContext);
+
     //Component State
     const [redirectToReferrer, setRedirectToReferrer] = useState(false)
     const [email, setEmail] = useState("");
@@ -27,11 +24,11 @@ const Login = () => {
     const [showEmailErrorText, setShowEmailErrorText] = useState(false)
 
     useEffect(() => {
-        authenticated && setRedirectToReferrer(true)
+        authenticated && setRedirectToReferrer(true);
     }, [authenticated])
 
     if (redirectToReferrer === true) {
-        return <Redirect to={state?.from || '/'} />
+        return <Redirect to={'/admin'} />
 
     }
 
@@ -52,18 +49,26 @@ const Login = () => {
         }
     };
 
-    return (
-        // <div>Login Page
-        //     <RoundedButton
-        //         size="sm"
-        //         color="primary"
-        //         onClick={login}
-        //     >
-        //         Login
-        //     </RoundedButton>
+    const handleLogin = (e) => {
+        if (email === "" && password === "") {
+            setShowEmailErrorText(true)
+            setValidEmailInput(false)
+        } else {
+            login(email, password)
+            e.preventDefault()
+        }
+    }
 
-        // </div>
+    return (
         <div className={classes.login}>
+            <Snackbar
+                message={error?.description || ""}
+                open={showError}
+                close={showError}
+                place="tr"
+                color="danger"
+                closeNotification={() => { setShowError(false), setError(null) }}
+            />
             <div className={classes.logo}>
                 <img src={logo} alt="market for you logo" />
             </div>
@@ -101,7 +106,7 @@ const Login = () => {
                             <RoundedButton
                                 color="secondary"
                                 type={"submit"}
-                                onClick={login}
+                                onClick={handleLogin}
                             > Login
                             </RoundedButton>
                         </div>

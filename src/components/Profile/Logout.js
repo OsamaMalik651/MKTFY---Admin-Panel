@@ -12,7 +12,7 @@ import { useContext } from 'react';
 const useStyles = makeStyles(styles);
 const Logout = ({ close }) => {
 
-    const { authenticated, logout } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
     const classes = useStyles();
 
     return (
