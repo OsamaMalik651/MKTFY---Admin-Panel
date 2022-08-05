@@ -38,7 +38,7 @@ import Faq from "views/FAQ/Faq";
 
 const dashboardRoutes = [
   {
-    path: "/customdashboard",
+    path: "/dashboard",
     name: "Dashboard",
     rtlName: "1لوحة القيادة",
     icon: GridIcon,

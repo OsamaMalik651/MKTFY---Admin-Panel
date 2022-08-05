@@ -33,12 +33,13 @@ ReactDOM.render(
   <AuthContextProvider>
     <BrowserRouter>
       <Switch>
-        <Route path="/login" exact component={Login} />
         <Route path="/login/forgetpassword" component={ForgetPassword} />
-        <ProtectedRoute path="/">
-          <Route path="/admin" component={Admin} />
-          <Redirect from="/" to="/admin/customdashboard" />
-        </ProtectedRoute>
+        <Route path="/">
+          <ProtectedRoute path="/admin">
+            <Admin />
+          </ProtectedRoute>
+          <ProtectedRoute path="/" component={Login} />
+        </Route>
       </Switch>
     </BrowserRouter>
   </AuthContextProvider>,
