@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import styles from "assets/jss/material-dashboard-react/views/faqStyle";
 import GridContainer from 'components/Grid/GridContainer';
 import Card from 'components/Card/Card';
@@ -14,6 +14,8 @@ import { useHistory } from 'react-router-dom';
 import Modal from 'components/Modal.js/Modal';
 import FaqEdit from 'components/Faq/FaqEdit';
 import RoundedButton from 'components/RoundedButton/RoundedButton';
+import { getFaqs, getFaq, createFaq, updateFaq } from 'services';
+// import { createFaq } from 'services';
 
 const useStyles = makeStyles(styles);
 const Faq = ({ searchTerm }) => {
@@ -21,45 +23,68 @@ const Faq = ({ searchTerm }) => {
     const classes = useStyles();
     const [showList, setShowList] = useState(true);
     const [selectedFaq, setSelectedFaq] = useState({ question: "", answer: "" })
-    const [faq, setFaq] = useState(FAQS);
+    const [faq, setFaq] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
     const useQuery = () => {
         const { search } = useLocation();
-
         return React.useMemo(() => new URLSearchParams(search), [search]);
     }
+
     let query = useQuery();
 
-    //dummy funciton to get  faq from dummyFaq file
-    const getFaq = (id) => {
-        return FAQS.find((element, index) => index === parseInt(id))
+    //functions to get FAQs
+    const createNewFaq = async (faqObject) => {
+        const response = await createFaq(faqObject);
     }
-    //Modify this function when integrating with backend to create new FAQ
-    const createNewFaq = (faqObject) => {
-        console.log(faqObject)
+
+    const updateAFaq = async (faqObject) => {
+        const response = await updateFaq(faqObject);
+        setSelectedFaq(response)
     }
-    //Modify this function when integrating with backend to edit a FAQ
-    const updateFaq = (faqObject) => {
-        console.log(faqObject)
+
+    const getfaqData = async () => {
+        const response = await getFaqs();
+        setFaq(response);
     }
+
+    const getSingleFaq = async () => {
+        const response = await getFaq(query.get('id'));
+        setSelectedFaq(response);
+    }
+
+    //When the add modal is closed, get the updated list of FAQs
     React.useEffect(() => {
+        !showModal && getfaqData();
+    }, [showModal]);
+
+    //When the edit modal is closed, get the updated list of FAQs
+    React.useEffect(() => {
+        //isMounted is used here to updated the state only when the component is mounted
+        let isMounted = true;
+
         if (query.get("id") === null) {
             setShowList(true)
         } else {
-            setSelectedFaq(getFaq(query.get("id")))
+            isMounted && getSingleFaq()
             setShowList(false)
         }
+        return () => {
+            // when component unmounts, set isMounted to false
+            isMounted = false;
+        };
 
     }, [query])
 
     React.useEffect(() => {
         if (searchTerm !== "") {
-            setFaq(FAQS.filter(faq => faq.question.toLowerCase().includes(searchTerm.toLowerCase())))
+            const filteredFaqs = faq.filter(faq => faq.title.toLowerCase().includes(searchTerm.toLowerCase()));
+            setFaq(filteredFaqs)
         } else {
-            setFaq(FAQS)
+            getfaqData()
         }
     }, [searchTerm])
+
     return (
         <div>
             {showList ?
@@ -71,19 +96,18 @@ const Faq = ({ searchTerm }) => {
                             <RoundedButton size="sm" color="secondary" onClick={() => { setShowModal(true) }}>Add</RoundedButton>
                         </CardHeader>
                         <CardBody className={classes.faqCardBody}>
-                            {faq.map((faq, index) => {
+                            {faq?.map((faq) => {
                                 return (
                                     <div
                                         className={classes.faqCardQuestions}
                                         key={faq.id}
                                     >
-                                        <Link className={classes.faqCardQuestion} to={`/admin/faq?id=${index}`}
+                                        <Link className={classes.faqCardQuestion} to={`/admin/faq?id=${faq.id}`}
                                         >
-                                            {faq.question}
+                                            {faq.title}
                                         </Link>
                                         <RighArrow />
                                     </div>
-
                                 );
                             })}
                         </CardBody>
@@ -93,26 +117,26 @@ const Faq = ({ searchTerm }) => {
                     <Card className={classes.faqCard}>
                         <CardHeader color="primary" className={classes.faqHeader}>
                             <LeftArrow onClick={() => history.goBack()} style={{ cursor: 'pointer' }} />
-                            <h1 className={classes.faqCardHeading}>{selectedFaq.question}</h1>
+                            <h1 className={classes.faqCardHeading}>{selectedFaq?.title}</h1>
                             <RoundedButton onClick={() => { setShowModal(true) }} color="secondary" size="sm">Edit</RoundedButton>
                         </CardHeader>
                         <CardBody className={classes.faqCardBody}>
                             <div className={classes.faqAnswers}>
-                                {selectedFaq.answer.split(".").map((sentence, index) => {
+                                {selectedFaq.description?.split(".").map((sentence, index) => {
                                     return (
                                         <p key={index} className={classes.faqAnswer}>{sentence}</p>
                                     );
                                 })}
                             </div>
-
                         </CardBody>
                     </Card>
                 </GridContainer>
             }
             {showModal && <Modal>
                 {!showList ?
-                    <FaqEdit close={setShowModal} faq={selectedFaq} edit onSave={(faqObject) => updateFaq(faqObject)} /> :
-                    <FaqEdit close={setShowModal} onSave={(faqObject) => createNewFaq(faqObject)} />}
+                    <FaqEdit close={setShowModal} faq={selectedFaq} edit onSave={(faqObject) => updateAFaq(faqObject)} /> :
+                    <FaqEdit close={setShowModal} onSave={(faqObject) => createNewFaq(faqObject)} />
+                }
             </Modal>
             }
         </div >

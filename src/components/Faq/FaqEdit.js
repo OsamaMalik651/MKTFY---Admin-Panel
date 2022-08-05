@@ -14,7 +14,7 @@ const FaqEdit = ({ close, faq, edit, onSave }) => {
     const classes = useStyles();
     const [question, setQuestion] = useState("")
     const [answer, setAnswer] = useState("")
-    const [faqToEdit, setFaqToEdit] = useState(edit ? faq : { id: "", question: "", answer: "" })
+    const [faqToEdit, setFaqToEdit] = useState(edit ? faq : { id: "", title: "", description: "" })
     const [enableSaveButton, setEnableSaveButton] = useState(false)
 
     useEffect(() => {
@@ -33,11 +33,9 @@ const FaqEdit = ({ close, faq, edit, onSave }) => {
     }
     const handleSave = () => {
         if (!edit) {
-            onSave({ question, answer })
-
+            onSave({ "title": question, "description": answer })
         } else {
             onSave(faqToEdit)
-
         }
         close()
     }
@@ -52,14 +50,14 @@ const FaqEdit = ({ close, faq, edit, onSave }) => {
                     <CardBody className={classes.faqCardBody}>
                         <GridItem>
                             <div className={classes.InputDiv}>
-                                <label>Question</label>
-                                <input name="question" value={faqToEdit.question} className={classes.Input} onChange={onEditChange} />
+                                <label htmlFor='title'>Question</label>
+                                <input name="title" value={faqToEdit.title} className={classes.Input} onChange={onEditChange} />
                             </div>
                         </GridItem>
                         <GridItem>
                             <div className={classes.TextAreaDiv}>
-                                <label>Answer</label>
-                                <textarea name="answer" value={faqToEdit.answer} className={classes.TextArea} onChange={onEditChange} />
+                                <label htmlFor='description'>Answer</label>
+                                <textarea name="description" value={faqToEdit.description} className={classes.TextArea} onChange={onEditChange} />
                             </div>
                         </GridItem>
                         <RoundedButton color="primary" size="lg" className={classes.Button} onClick={handleSave}>Save Changes</RoundedButton>
