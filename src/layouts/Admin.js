@@ -30,7 +30,7 @@ const switchRoutes = (searchTerm) => {
             // component={prop.component}
             key={key}
           >
-            <prop.component searchTerm={searchTerm} />
+            <prop.component searchTerm={searchTerm} routes={prop.routes} />
           </Route>
         );
       }

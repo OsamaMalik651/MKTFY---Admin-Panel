@@ -90,9 +90,8 @@ export const users = [
         purchases: 20,
     }
 
-
-
-
-
-
 ]
+
+export const getUserById = (id) => {
+    return users.find(user => user.id === id)
+}

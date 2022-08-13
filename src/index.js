@@ -32,13 +32,23 @@ import ForgetPassword from "views/Login/ForgetPassword";
 ReactDOM.render(
   <AuthContextProvider>
     <BrowserRouter>
-      <Switch>
+      {/* <Switch>
         <Route path="/login/forgetpassword" component={ForgetPassword} />
+        
         <Route path="/">
           <ProtectedRoute path="/admin">
             <Admin />
           </ProtectedRoute>
           <ProtectedRoute path="/" component={Login} />
+        </Route>
+      </Switch> */}
+      <Switch>
+        <Route path="/login/forgetpassword" component={ForgetPassword} />
+        <Route path="/">
+          <Route path="/admin">
+            <Route index component={Admin} />
+          </Route>
+          <Route path="/" component={Login} />
         </Route>
       </Switch>
     </BrowserRouter>

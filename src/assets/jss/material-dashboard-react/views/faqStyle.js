@@ -24,7 +24,6 @@ const faqStyle = {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-
     },
     faqCardHeading: {
         margin: 0,

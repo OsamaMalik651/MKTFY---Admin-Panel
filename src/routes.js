@@ -36,6 +36,8 @@ import CustomDashboard from "views/CustomDashboard/CustomDashboard";
 import Listings from "views/Listings/Listings";
 import Faq from "views/FAQ/Faq";
 import Users from "views/Users/Users";
+import UserDetails from "components/User/UserDetails";
+import UserList from "components/User/UserList";
 
 const dashboardRoutes = [
   {
@@ -62,6 +64,12 @@ const dashboardRoutes = [
     icon: UserIcon,
     component: Users,
     layout: "/admin",
+    routes: [{
+      path: "/user/:id",
+      name: "Users",
+      component: UserDetails,
+    }
+    ]
   },
   {
     path: "/faq",
