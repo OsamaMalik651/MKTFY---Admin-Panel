@@ -35,6 +35,7 @@ import FaqIcon from "assets/img/help-circle.svg"
 import CustomDashboard from "views/CustomDashboard/CustomDashboard";
 import Listings from "views/Listings/Listings";
 import Faq from "views/FAQ/Faq";
+import Users from "views/Users/Users";
 
 const dashboardRoutes = [
   {
@@ -56,10 +57,10 @@ const dashboardRoutes = [
   },
   {
     path: "/user",
-    name: "User",
+    name: "Users",
     rtlName: "ملف تعريفي للمستخدم",
     icon: UserIcon,
-    component: UserProfile,
+    component: Users,
     layout: "/admin",
   },
   {

@@ -91,7 +91,6 @@ const Faq = ({ searchTerm }) => {
                 <GridContainer>
                     <Card className={classes.faqCard}>
                         <CardHeader color="primary" className={classes.faqHeader}>
-
                             <h1 className={classes.faqCardHeading}>Frequently Asked Questions</h1>
                             <RoundedButton size="sm" color="secondary" onClick={() => { setShowModal(true) }}>Add</RoundedButton>
                         </CardHeader>

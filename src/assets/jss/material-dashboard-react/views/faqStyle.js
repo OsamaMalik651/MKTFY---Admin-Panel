@@ -1,4 +1,5 @@
 
+import { yellow } from "@material-ui/core/colors"
 import { whiteColor, blackColor, hexToRgb } from "assets/jss/material-dashboard-react"
 
 const faqStyle = {
@@ -23,6 +24,7 @@ const faqStyle = {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+
     },
     faqCardHeading: {
         margin: 0,
@@ -31,7 +33,7 @@ const faqStyle = {
         fontSize: "600",
         fontFamily: "Open Sans",
         color: "#F4F4F5",
-        margin: "1.5rem auto 1.5rem 1.5rem"
+        margin: "1.5rem auto 1.5rem 1.5rem",
     },
     faqCardBody: {
         margin: 0,
