@@ -24,7 +24,8 @@ const Login = () => {
     const [showEmailErrorText, setShowEmailErrorText] = useState(false)
 
     useEffect(() => {
-        authenticated && setRedirectToReferrer(true);
+        console.log("authenticated useEffect ran")
+        authenticated && setRedirectToReferrer(true)
     }, [authenticated])
 
     if (redirectToReferrer === true) {

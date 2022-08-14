@@ -6,9 +6,15 @@ import axios from "../utils/axios-helper"
 const { REACT_APP_DOMAIN, REACT_APP_CLIENTID, REACT_APP_AUDIENCE } = process.env
 
 export const AuthContext = createContext();
-
+const checkAccessToken = () => {
+    const token = sessionStorage.getItem("access_token");
+    if (token) {
+        return true;
+    }
+    return false;
+}
 export const AuthContextProvider = ({ children }) => {
-    const [authenticated, setAuthenticated] = useState(false)
+    const [authenticated, setAuthenticated] = useState(checkAccessToken())
     const [singUpCompleted, setSignUpCompleted] = useState(false)
     const [error, setError] = useState({ title: "", description: "" })
     const [showError, setShowError] = useState(false)
@@ -25,13 +31,10 @@ export const AuthContextProvider = ({ children }) => {
         let access_token = new URLSearchParams(
             document.location.hash.substring(1)).get("access_token")
         if (access_token) {
-            console.log("access token found")
             sessionStorage.setItem("access_token", access_token);
             setAuthenticated(true)
             webAuth.client.userInfo(access_token, (error, user) => {
-
                 if (error) return console.log(error)
-
                 let newUserDetails = JSON.parse(sessionStorage.getItem("userDetails"))
                 if (newUserDetails) {
                     //create user in backend
@@ -43,6 +46,7 @@ export const AuthContextProvider = ({ children }) => {
             })
         }
     }, [authenticated])
+
     const login = (email, password) => {
         webAuth.login(
             {

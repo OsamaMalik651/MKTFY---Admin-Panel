@@ -12,7 +12,7 @@ import { useContext } from 'react';
 const useStyles = makeStyles(styles);
 const Logout = ({ close }) => {
 
-    const { logout } = useContext(AuthContext);
+    const { logout, setAuthenticated } = useContext(AuthContext);
     const classes = useStyles();
 
     return (
@@ -35,7 +35,7 @@ const Logout = ({ close }) => {
                         <RoundedButton
                             size="sm"
                             color="primary"
-                            onClick={logout}
+                            onClick={() => { setAuthenticated(false); close() }}
                         >
                             Logout
                         </RoundedButton>
